@@ -1,0 +1,137 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial,  sans-serif;
+    background-color: #f1f5f9;
+    color: #1e293b;
+    min-height: 100vh;
+}
+header{
+    background-color: #172554;
+    color: white;
+    padding: 22px 8%;
+    text-align: center;
+}
+    
+header h1{
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+header p{
+    color: #cbd5e1;
+    font-size: 14px;
+}
+main{
+    width: 85%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+   
+.event-details,
+.booking-section,
+.booking-summary,
+.my-bookings{
+    background-color: white;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(15 ,23, 42, 0.08);
+    
+}
+.event-details:hover,
+.booking-section:hover,
+.booking-summary:hover,
+.my-bookings:hover{
+    transform: translate(-3px);
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+}
+
+section h2{
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #172554;
+
+}
+.event-info{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 20px;
+}
+.event-info div{
+    background-color: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
+    border-left: 4px solid #4f46e5;
+    
+}
+.event-info div:hover{
+    transform: translate(-3px);
+    box-shadow: 0 5px 12px rgba(15, 23, 42, 0.08);
+
+}
+.event-info h3{
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+.event-info p{
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+
+}
+
+.booking-section{
+    text-align: center;
+}
+.stage{
+    width: 60%;
+    max-width: 500px;
+    margin: 25px auto 35px;
+    background-color: #172554;
+    color: white;
+    padding: 13px;
+    border-radius: 8px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+.seat-container{
+    display: grid;
+    grid-template-columns: repeat(10,1fr);
+    gap: 12px;
+    max-width: 700px;
+    margin: auto;
+}
+.seat{
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+.seat:hover{
+    transform: translateY(-4px)
+    scale(1.05);
+}
+.available{
+    background-color: #18b852;
+    color: white;
+}
+.selected{
+    background-color: rgb(28, 28, 196);
+    color: white;
+}
+.booked{
+    background-color: #bd1c1c;
+    color: white;
+    opacity: 0.75;
+    cursor: not-allowed;
+}
+
+
