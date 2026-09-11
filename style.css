@@ -133,5 +133,129 @@ section h2{
     opacity: 0.75;
     cursor: not-allowed;
 }
+.booking-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+.booking-info div{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
 
+}
+.booking-info span{
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    display: inline-block;
+}
+.booking-summary{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.selected-seats{
+    background-color: #f8fafc;
+    padding: 18px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+}
+.selected-seats h3{
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+.price-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e2e8f0;
 
+}
+#total-amount{
+    color: #4f46e5;
+    font-size: 20px;
+    font-weight: bold;
+}
+button{
+    border: none;
+    background-color: #4f46e6;
+    color: white;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+button:hover:not(:disabled){
+    background-color: #3730a3;
+    transform : translate(-2px);
+    box-shadow: 0 5px 12px rgba(79, 70, 229, 0.25);
+}
+button:active:not(:disabled){
+    transform :  translateY(0)
+}
+.my-bookings{
+    min-height: 150px;
+}
+#booking-lists{
+    color: #64748b;
+}
+@media(max-width: 500px){
+    header{
+        padding : 18px 5%;
+    }
+    header h1{
+        font-size: 21px;
+    }
+    header p{
+        font-size: 13px;
+    }
+    main{
+        width: 94%;
+        margin: 20px auto;
+    }
+    .event-details,
+    .booking-section,
+    .booking-summary,
+    .my-bookings{
+        padding: 18px;
+        border-radius: 10px;
+
+    }
+    .event-info{
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .stage{
+        width: 85%;
+    }
+    .seat-container{
+        grid-template-columns: repeat(5,1fr);
+        gap: 8px;
+    }
+    .seat{
+        height: 35px;
+        font-size: 11px;
+
+    }
+    .booking-info{
+        gap: 15px;
+    }
+    .price-details{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    button{
+        width: 100%;
+    }
+
+}
