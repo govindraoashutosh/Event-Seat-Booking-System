@@ -1,6 +1,6 @@
 const seats = [];
 
-for(i = 1; i<= 60; i++){
+for( let i = 1; i<= 60; i++){
     let category;
     let price;
     if(i <= 20){
@@ -36,6 +36,7 @@ for(i = 1; i<= 60; i++){
         const totalseats = document.getElementById("booking-total-seats");
          const totalAmount = document.getElementById("booking-total-amount");
           const bookingStatus = document.getElementById("booking-status");
+           const cancelBooking = document.getElementById("cancel-booking");
 
         const saveData = JSON.parse(localStorage.getItem("bookedSeats"));
          const savedBookedseats = Array.isArray(saveData) ? saveData : [];
@@ -69,6 +70,18 @@ for(i = 1; i<= 60; i++){
     }
     totalSeats.textContent = selectedSeats.length;
     totalAmountElement.textContent = "₹" + totalAmount;
+   }
+
+   function showBookings() {
+     const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+     if(savedBookings.length === 0){
+        return ;
+     }
+      const bookings = savedBookings[savedBookings.length - 1];
+      bookingSeats.textContent = bookings.seats.join(",");
+      totalseats.textContent = bookings.totalSeats;
+      totalAmount.textContent = "₹" + bookings.totalAmount;
+      bookingStatus.textContent = bookings.status;
    }
 
 
@@ -127,7 +140,13 @@ confirmBooking.addEventListener("click", function(){
             },0),
             status : "confirmed" 
 
-        }
+        };
+
+         const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+         savedBookings.push(booking);
+         localStorage.setItem("bookings", JSON.stringify(savedBookings));
+
+
         bookingSeats.textContent = booking.seats.join(",");
         totalseats.textContent = booking.totalSeats;
         totalAmount.textContent =  "₹" +  booking.totalAmount;
@@ -148,4 +167,6 @@ confirmBooking.addEventListener("click", function(){
 
     alert("Booking confirm successfully:");
 })
+
+showBookings();
 
