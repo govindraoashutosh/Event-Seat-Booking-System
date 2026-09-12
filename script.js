@@ -27,6 +27,25 @@ for(i = 1; i<= 60; i++){
 }
 
  const seatContainer = document.getElementById("seat-container");
+  const selectedseatsElement = document.getElementById("selected-seats");
+   const totalSeats = document.getElementById("total-seats");
+
+   function updateBookingSummary(){
+     const selectedSeats = seats.filter(function(seat) {
+         return seat.status === "selected";
+    })
+    if(selectedSeats.length === 0){
+        selectedseatsElement.textContent = "No seats Selected";
+    }
+    else {
+        selectedseatsElement.textContent = selectedSeats.map(function(seat) {
+            return seat.id
+        }).join(",");
+    }
+    totalSeats.textContent = selectedSeats.length;
+   }
+
+
  seats.forEach(function(seat){
      const seatElement = document.createElement("div");
      seatElement.classList.add("seat");
@@ -48,6 +67,8 @@ for(i = 1; i<= 60; i++){
             seatElement.classList.add("available");
 
         }
+
+        updateBookingSummary();
 
         
      })
