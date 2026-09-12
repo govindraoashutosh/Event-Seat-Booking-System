@@ -32,6 +32,18 @@ for(i = 1; i<= 60; i++){
     const totalAmountElement = document.getElementById("total-amount");
      const confirmBooking = document.getElementById("confirm-booking");
 
+        const saveData = JSON.parse(localStorage.getItem("bookedSeats"));
+         const savedBookedseats = Array.isArray(saveData) ? saveData : [];
+
+         savedBookedseats.forEach(function(savedSeatid) {
+             const seat = seats.find(function(seat) {
+                 return seat.id === savedSeatid;
+            })
+            if(seat){
+                seat.status = "booked";
+            }
+         })
+
 
    function updateBookingSummary(){
      const selectedSeats = seats.filter(function(seat) {
@@ -100,7 +112,19 @@ confirmBooking.addEventListener("click", function(){
             seat.element.classList.remove("selected");
             seat.element.classList.add("booked");
         })
+         const bookedSeats = seats.filter(function(seat) {
+             return seat.status === "booked";
+             
+
+        })
+        .map(function(seat){
+            return seat.id;
+        })
+
+        localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
     
     updateBookingSummary();
+
+    alert("Booking confirm successfully:");
 })
 
