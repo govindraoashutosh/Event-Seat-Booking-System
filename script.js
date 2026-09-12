@@ -62,6 +62,8 @@ for(i = 1; i<= 60; i++){
      seatElement.textContent = seat.id;
 
      seatContainer.appendChild(seatElement);
+      seat.element = seatElement;
+
 
      seatElement.addEventListener("click", function(){
         if(seat.status === "available"){
@@ -74,8 +76,7 @@ for(i = 1; i<= 60; i++){
             seat.status = "available";
             seatElement.classList.remove("selected");
             seatElement.classList.add("available");
-            seat.element = seatElement;
-
+           
         }
 
         updateBookingSummary();
