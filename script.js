@@ -29,10 +29,18 @@ for(i = 1; i<= 60; i++){
  const seatContainer = document.getElementById("seat-container");
   const selectedseatsElement = document.getElementById("selected-seats");
    const totalSeats = document.getElementById("total-seats");
+    const totalAmountElement = document.getElementById("total-amount");
+     const confirmBooking = document.getElementById("confirm-booking");
+
 
    function updateBookingSummary(){
      const selectedSeats = seats.filter(function(seat) {
          return seat.status === "selected";
+    })
+
+    let totalAmount = 0;
+    selectedSeats.forEach(function(seat) {
+        totalAmount = totalAmount + seat.price;
     })
     if(selectedSeats.length === 0){
         selectedseatsElement.textContent = "No seats Selected";
@@ -43,6 +51,7 @@ for(i = 1; i<= 60; i++){
         }).join(",");
     }
     totalSeats.textContent = selectedSeats.length;
+    totalAmountElement.textContent = "₹" + totalAmount;
    }
 
 
@@ -65,6 +74,7 @@ for(i = 1; i<= 60; i++){
             seat.status = "available";
             seatElement.classList.remove("selected");
             seatElement.classList.add("available");
+            seat.element = seatElement;
 
         }
 
@@ -74,3 +84,22 @@ for(i = 1; i<= 60; i++){
      })
 
  });
+
+confirmBooking.addEventListener("click", function(){
+     const selectedSeats = seats.filter(function(seat) {
+         return seat.status === "selected";
+    })
+    if(selectedSeats.length === 0){
+        alert("please select at least one seat.");
+        return;
+    }
+    
+        selectedSeats.forEach(function(seat) {
+            seat.status = "booked";
+            seat.element.classList.remove("selected");
+            seat.element.classList.add("booked");
+        })
+    
+    updateBookingSummary();
+})
+
