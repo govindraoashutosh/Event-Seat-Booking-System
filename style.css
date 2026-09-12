@@ -5,20 +5,22 @@
 }
 body{
     font-family: Arial,  sans-serif;
-    background-color: #f1f5f9;
+    background : linear-gradient(135deg,#eef2ff);
     color: #1e293b;
     min-height: 100vh;
 }
 header{
-    background-color: #172554;
+    background : linear-gradient(135deg,#172554);
     color: white;
     padding: 22px 8%;
     text-align: center;
+    box-shadow: 0 8px 25px rgba(23, 37, 84, 0.2);
 }
     
 header h1{
     font-size: 28px;
     margin-bottom: 6px;
+    letter-spacing: 0.5px;
 }
 header p{
     color: #cbd5e1;
@@ -39,6 +41,9 @@ main{
     padding: 25px;
     margin-bottom: 25px;
     box-shadow: 0 4px 15px rgba(15 ,23, 42, 0.08);
+    border: 1px solid rgba(226, 232, 240, 0.08);
+    transition: transform 0.25s ease,
+    box-shadow 0.25s ease;
     
 }
 .event-details:hover,
@@ -47,6 +52,7 @@ main{
 .my-bookings:hover{
     transform: translate(-3px);
     box-shadow: 0 8px 22px rgba(15, 23, 42, 0.12);
+
 }
 
 section h2{
@@ -65,6 +71,7 @@ section h2{
     padding: 18px;
     border-radius: 10px;
     border-left: 4px solid #4f46e5;
+    transition: transform 0.2s ease;
     
 }
 .event-info div:hover{
@@ -76,6 +83,8 @@ section h2{
     font-size: 14px;
     color: #64748b;
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 .event-info p{
     font-size: 16px;
