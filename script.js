@@ -31,6 +31,11 @@ for(i = 1; i<= 60; i++){
    const totalSeats = document.getElementById("total-seats");
     const totalAmountElement = document.getElementById("total-amount");
      const confirmBooking = document.getElementById("confirm-booking");
+      const bookingList = document.getElementById("booking-list");
+       const bookingSeats = document.getElementById("booking-seats");
+        const totalseats = document.getElementById("booking-total-seats");
+         const totalAmount = document.getElementById("booking-total-amount");
+          const bookingStatus = document.getElementById("booking-status");
 
         const saveData = JSON.parse(localStorage.getItem("bookedSeats"));
          const savedBookedseats = Array.isArray(saveData) ? saveData : [];
@@ -112,6 +117,22 @@ confirmBooking.addEventListener("click", function(){
             seat.element.classList.remove("selected");
             seat.element.classList.add("booked");
         })
+        const booking = {
+            seats : selectedSeats.map(function(seat){
+                return seat.id ;
+            }),
+            totalSeats : selectedSeats.length,
+            totalAmount : selectedSeats.reduce(function(total,seat){
+                return total + seat.price;
+            },0),
+            status : "confirmed" 
+
+        }
+        bookingSeats.textContent = booking.seats.join(",");
+        totalseats.textContent = booking.totalSeats;
+        totalAmount.textContent =  "₹" +  booking.totalAmount;
+        bookingStatus.textContent = booking.status;
+       
          const bookedSeats = seats.filter(function(seat) {
              return seat.status === "booked";
              
