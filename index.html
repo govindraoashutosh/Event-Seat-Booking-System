@@ -3,99 +3,251 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Seat Booking System</title>
+    <title>EventEase - Event Seat Booking</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Event Seat Booking </h1>
-    <p>Book your seat for the upcoming event</p>
 
-    </header>
-    <main>
-        <section class="event-details">
+<header class="main-header">
+    <nav class="navbar">
+        <div class="logo-section">
+            <div class="logo-icon">🎟️</div>
+            <div class="logo-text">Event<span>Ease</span></div>
+        </div>
+
+        <div class="nav-links">
+            <a href="#event">Event</a>
+            <a href="#booking">Seats</a>
+            <a href="#my-bookings">Bookings</a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="login-button" id="login-btn">Login</button>
+            <button class="signup-button" id="signup-btn">Sign Up</button>
+            <a href="#booking" class="nav-button">Book Now →</a>
+        </div>
+    </nav>
+</header>
+
+<div class="auth-panel" id="auth-panel">
+    <div class="auth-box">
+        <button class="close-auth" id="close-auth">×</button>
+        <div class="auth-heading">
+            <span class="section-label" id="auth-label">WELCOME BACK</span>
+            <h2 id="auth-title">Login to EventEase</h2>
+            <p id="auth-description">Access your bookings and manage your tickets.</p>
+        </div>
+
+        <form>
+            <div id="name-field" class="name-field">
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name">
+            </div>
+            <div>
+                <label>Email Address</label>
+                <input type="email" placeholder="Enter your email">
+            </div>
+            <div>
+                <label>Password</label>
+                <input type="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="auth-button" id="auth-submit">Login →</button>
+        </form>
+
+        <p class="auth-switch">
+            <span id="auth-switch-text">Don't have an account?</span>
+            <button type="button" id="switch-auth">Sign Up</button>
+        </p>
+    </div>
+</div>
+
+<main>
+
+<section class="hero">
+    <div class="hero-content">
+        <span class="hero-tag">LIVE EVENT • 2026</span>
+        <h1>Book Your <span>Perfect Seat.</span></h1>
+        <p>Choose your preferred seat and enjoy an unforgettable musical experience.</p>
+        <div class="hero-buttons">
+            <a href="#booking" class="primary-button">Choose Seats →</a>
+            <a href="#event" class="secondary-button">View Event</a>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="hero-main-card">
+            <div class="music-icon">♫</div>
+            <h3>Musical Night</h3>
+            <p>City Auditorium</p>
+        </div>
+        <div class="hero-card hero-card-one">🎵</div>
+        <div class="hero-card hero-card-two">✨</div>
+        <div class="hero-card hero-card-three">🎤</div>
+    </div>
+</section>
+
+<section class="event-details" id="event">
+    <div class="section-heading">
+        <div>
+            <span class="section-label">EVENT INFORMATION</span>
             <h2>Event Details</h2>
-            <div class="event-info">
-                 <div>
-                <h3>Event</h3>
-                <p>Musical Night</p>
-            </div>
-            <div>
-                <h3>Date</h3>
-                <p>14 september 2026</p>
-            </div>
-            <div>
-                <h3>Venue</h3>
-                <p>City Auditorium</p>
-            </div>
-            <div>
-                <h3>capacity</h3>
-                <p>60 seats</p>
-            </div>
-            </div>
-           
-        </section>
+        </div>
+        <span class="event-status">● LIVE EVENT</span>
+    </div>
 
-        <section class="booking-section">
+    <div class="event-info">
+        <div class="event-info-card"><div class="info-icon">🎵</div><div><h3>Event</h3><p>Musical Night</p></div></div>
+        <div class="event-info-card"><div class="info-icon">📅</div><div><h3>Date</h3><p>14 September 2026</p></div></div>
+        <div class="event-info-card"><div class="info-icon">📍</div><div><h3>Venue</h3><p>City Auditorium</p></div></div>
+        <div class="event-info-card"><div class="info-icon">💺</div><div><h3>Capacity</h3><p>60 Seats</p></div></div>
+    </div>
+</section>
+
+<div class="booking-area" id="booking">
+
+<section class="booking-section">
+    <div class="section-heading">
+        <div>
+            <span class="section-label">SEAT SELECTION</span>
             <h2>Select Your Seats</h2>
-            <div class="booking-info">
-                <div>
-                    <span class="available"></span>
-                    <p>Available</p>
-                </div>
-                <div>
-                    <span class="selected"></span>
-                    <p>Selected</p>
-                </div>
-                <div>
-                    <span class="booked"></span>
-                    <p>Booked</p>
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="stage">
-                <p>Stage</p>
-            </div>
+    <div class="seat-types">
+        <div class="seat-type vip-type">
+            <div class="type-icon">♛</div>
+            <div class="type-info"><h3>VIP Seats</h3><p>20 Seats</p></div>
+            <strong>₹500</strong>
+        </div>
 
-            <div id="seat-container" class="seat-container"></div>
-        </section>
+        <div class="seat-type premium-type">
+            <div class="type-icon">★</div>
+            <div class="type-info"><h3>Premium Seats</h3><p>20 Seats</p></div>
+            <strong>₹300</strong>
+        </div>
 
-        <section class="booking-summary">
-            <h2> Booking Summary</h2>
-            <div class="selected-seats">
-                <h3>Selected seats</h3>
-                <p id="selected-seats">No Seats selected</p>
-            </div>
-            <div class="price-details">
-                <p>Total Seats: <span id="total-seats">0</span> </p>
-                
-            </div>
-            <div>
-                <p>Total Amount : <strong id="total-amount">₹0</strong></p>
-            </div>
-            <button id="confirm-booking">Confirm Booking</button>
+        <div class="seat-type regular-type">
+            <div class="type-icon">●</div>
+            <div class="type-info"><h3>Regular Seats</h3><p>20 Seats</p></div>
+            <strong>₹150</strong>
+        </div>
+    </div>
 
-        </section>
+    <div class="screen-area">
+        <div class="screen-light"></div>
+        <div class="stage"><span>STAGE</span></div>
+        <p>SCREEN</p>
+    </div>
 
-        <section class="my-bookings">
+    <div class="seat-category vip-category">
+        <div class="category-title">
+            <div class="category-name">
+                <span class="category-small-icon">♛</span>
+                <div><h3>VIP Seats</h3><p>20 Seats • Premium Experience</p></div>
+            </div>
+            <strong>₹500</strong>
+        </div>
+        <div id="vip-seats" class="seat-container"></div>
+    </div>
+
+    <div class="seat-category premium-category">
+        <div class="category-title">
+            <div class="category-name">
+                <span class="category-small-icon">★</span>
+                <div><h3>Premium Seats</h3><p>20 Seats • Great View & Comfort</p></div>
+            </div>
+            <strong>₹300</strong>
+        </div>
+        <div id="premium-seats" class="seat-container"></div>
+    </div>
+
+    <div class="seat-category regular-category">
+        <div class="category-title">
+            <div class="category-name">
+                <span class="category-small-icon">●</span>
+                <div><h3>Regular Seats</h3><p>20 Seats • Comfortable & Affordable</p></div>
+            </div>
+            <strong>₹150</strong>
+        </div>
+        <div id="regular-seats" class="seat-container"></div>
+    </div>
+
+    <div class="booking-info">
+        <div class="legend-item"><span class="available"></span>Available</div>
+        <div class="legend-item"><span class="selected"></span>Selected</div>
+        <div class="legend-item"><span class="booked"></span>Booked</div>
+    </div>
+</section>
+
+<section class="booking-summary">
+    <div class="summary-header">
+        <div>
+            <span class="section-label">YOUR TICKET</span>
+            <h2>Booking Summary</h2>
+        </div>
+        <div class="ticket-icon">🎟️</div>
+    </div>
+
+    <div class="summary-event-card">
+        <div class="summary-event-image">🎵</div>
+        <div class="summary-event-content">
+            <span>MUSICAL EVENT</span>
+            <h3>Musical Night</h3>
+            <p>📅 14 Sep 2026</p>
+            <p>📍 City Auditorium</p>
+        </div>
+    </div>
+
+    <div class="selected-seats">
+        <div class="summary-row-title">
+            <h3>Selected Seats</h3>
+            <span id="total-seats">0</span>
+        </div>
+        <p id="selected-seats">No seats Selected</p>
+    </div>
+
+    <div class="price-details">
+        <div class="price-row">
+            <p>Total Seats</p>
+            <span id="summary-total-seats">0</span>
+        </div>
+    </div>
+
+    <div class="total-box">
+        <p>Total Amount</p>
+        <strong id="total-amount">₹0</strong>
+    </div>
+
+    <button id="confirm-booking" class="confirm-button">Confirm Booking →</button>
+</section>
+
+</div>
+
+<section class="my-bookings" id="my-bookings">
+    <div class="section-heading">
+        <div>
+            <span class="section-label">BOOKING HISTORY</span>
             <h2>My Bookings</h2>
-            <div id="booking-list">
-                <p> seats: <span id="booking-seats"></span></p>
-                <p>Total seats : <span id="booking-total-seats"></span></p>
-                <p>Total Amount : <span id="booking-total-amount"></span></p>
-                <p>status : <span id="booking-status"></span></p>
+        </div>
+    </div>
 
-                
+    <div id="booking-list" class="booking-list">
+        <div class="booking-card">
+            <div class="booking-card-icon">🎟️</div>
+
+            <div class="booking-card-details">
+                <p>Seats<span id="booking-seats"></span></p>
+                <p>Total Seats<span id="booking-total-seats"></span></p>
+                <p>Total Amount<span id="booking-total-amount"></span></p>
+                <p>Status<span id="booking-status"></span></p>
             </div>
-        </section>
 
+            <button id="cancel-booking" class="cancel-button">Cancel Booking</button>
+        </div>
+    </div>
+</section>
 
-    </main>
-
-   
-    
-    
-
-<script src="script.js"></script>    
+</main>
+<script src="script.js"></script>
 </body>
 </html>
