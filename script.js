@@ -25,7 +25,9 @@ for( let i = 1; i<= 60; i++){
 
 })
 }
-
+const vipSeats = document.getElementById("vip-seats");
+const premiumSeats = document.getElementById("premium-seats");
+const regularSeats = document.getElementById("regular-seats");
  const seatContainer = document.getElementById("seat-container");
   const selectedseatsElement = document.getElementById("selected-seats");
    const totalSeats = document.getElementById("total-seats");
@@ -85,36 +87,36 @@ for( let i = 1; i<= 60; i++){
    }
 
 
- seats.forEach(function(seat){
-     const seatElement = document.createElement("div");
-     seatElement.classList.add("seat");
-     seatElement.classList.add(seat.status);
-     seatElement.textContent = seat.id;
+ seats.forEach(function(seat) {
+    const seatElement = document.createElement("div");
 
-     seatContainer.appendChild(seatElement);
-      seat.element = seatElement;
+    seatElement.classList.add("seat", seat.status);
+    seatElement.textContent = seat.id;
 
+    if (seat.category === "VIP") {
+        vipSeats.appendChild(seatElement);
+    } else if (seat.category === "premium") {
+        premiumSeats.appendChild(seatElement);
+    } else {
+        regularSeats.appendChild(seatElement);
+    }
 
-     seatElement.addEventListener("click", function(){
-        if(seat.status === "available"){
+    seat.element = seatElement;
+
+    seatElement.addEventListener("click", function() {
+        if (seat.status === "available") {
             seat.status = "selected";
             seatElement.classList.remove("available");
             seatElement.classList.add("selected");
-        }
-
-        else if(seat.status === "selected"){
+        } else if (seat.status === "selected") {
             seat.status = "available";
             seatElement.classList.remove("selected");
             seatElement.classList.add("available");
-           
         }
 
         updateBookingSummary();
-
-        
-     })
-
- });
+    });
+});
 
 confirmBooking.addEventListener("click", function(){
      const selectedSeats = seats.filter(function(seat) {
@@ -167,6 +169,51 @@ confirmBooking.addEventListener("click", function(){
 
     alert("Booking confirm successfully:");
 })
+cancelBooking.addEventListener("click", function() {
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
+    if (bookings.length === 0) {
+        return;
+    }
+
+    const booking = bookings[bookings.length - 1];
+
+    if (booking.status === "cancelled") {
+        return;
+    }
+
+    booking.seats.forEach(function(id) {
+        const seat = seats.find(function(seat) {
+            return seat.id === id;
+        });
+
+        if (seat) {
+            seat.status = "available";
+            seat.element.classList.remove("booked");
+            seat.element.classList.add("available");
+        }
+    });
+
+    booking.status = "cancelled";
+
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    const bookedSeats = seats
+        .filter(function(seat) {
+            return seat.status === "booked";
+        })
+        .map(function(seat) {
+            return seat.id;
+        });
+
+    localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
+
+    bookingStatus.textContent = "cancelled";
+    cancelBooking.style.display = "none";
+
+    updateBookingSummary();
+
+    alert("Booking cancelled successfully!");
+});
 showBookings();
 
