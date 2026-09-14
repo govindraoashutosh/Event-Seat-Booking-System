@@ -34,11 +34,11 @@ const regularSeats = document.getElementById("regular-seats");
     const totalAmountElement = document.getElementById("total-amount");
      const confirmBooking = document.getElementById("confirm-booking");
       const bookingList = document.getElementById("booking-list");
-       const bookingSeats = document.getElementById("booking-seats");
-        const totalseats = document.getElementById("booking-total-seats");
-         const totalAmount = document.getElementById("booking-total-amount");
-          const bookingStatus = document.getElementById("booking-status");
-           const cancelBooking = document.getElementById("cancel-booking");
+    //    const bookingSeats = document.getElementById("booking-seats");
+    //     const totalseats = document.getElementById("booking-total-seats");
+    //      const totalAmount = document.getElementById("booking-total-amount");
+    //       const bookingStatus = document.getElementById("booking-status");
+    //        const cancelBooking = document.getElementById("cancel-booking");
 
         const saveData = JSON.parse(localStorage.getItem("bookedSeats"));
          const savedBookedseats = Array.isArray(saveData) ? saveData : [];
@@ -74,17 +74,49 @@ const regularSeats = document.getElementById("regular-seats");
     totalAmountElement.textContent = "₹" + totalAmount;
    }
 
-   function showBookings() {
-     const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
-     if(savedBookings.length === 0){
-        return ;
-     }
-      const bookings = savedBookings[savedBookings.length - 1];
-      bookingSeats.textContent = bookings.seats.join(",");
-      totalseats.textContent = bookings.totalSeats;
-      totalAmount.textContent = "₹" + bookings.totalAmount;
-      bookingStatus.textContent = bookings.status;
-   }
+//    function showBookings() {
+//      const savedBookings = JSON.parse(localStorage.getItem("bookings")) || [];
+//      if(savedBookings.length === 0){
+//         return ;
+//      }
+//       const bookings = savedBookings[savedBookings.length - 1];
+//       bookingSeats.textContent = bookings.seats.join(",");
+//       totalseats.textContent = bookings.totalSeats;
+//       totalAmount.textContent = "₹" + bookings.totalAmount;
+//       bookingStatus.textContent = bookings.status;
+//    }
+
+function showBookings(){
+     const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+       const template = document.getElementById("booking-template");
+
+      document.querySelectorAll(".booking-card:not(#booking-template)").forEach(function(card) {
+        card.remove();
+    });
+
+       if(bookings.length === 0){
+        
+        return;
+       }
+       bookings.forEach(function(booking,index){
+        const card = template.cloneNode(true);
+
+        card.removeAttribute("id");
+        card.style.display = "flex";
+
+        card.querySelector(".booking-seats").textContent = booking.seats.join(",");
+         card.querySelector(".booking-total-seats").textContent = booking.totalSeats;
+          card.querySelector(".booking-total-amount").textContent = "₹" + booking.totalAmount;
+           card.querySelector(".booking-status").textContent = booking.status;
+
+           const cancelButton = card.querySelector(".cancel-button");
+           cancelButton.addEventListener("click", function(){
+            cancelBookingByIndex(index);
+           })
+           bookingList.appendChild(card);
+        
+       })
+}
 
 
  seats.forEach(function(seat) {
@@ -149,10 +181,10 @@ confirmBooking.addEventListener("click", function(){
          localStorage.setItem("bookings", JSON.stringify(savedBookings));
 
 
-        bookingSeats.textContent = booking.seats.join(",");
-        totalseats.textContent = booking.totalSeats;
-        totalAmount.textContent =  "₹" +  booking.totalAmount;
-        bookingStatus.textContent = booking.status;
+        // bookingSeats.textContent = booking.seats.join(",");
+        // totalseats.textContent = booking.totalSeats;
+        // totalAmount.textContent =  "₹" +  booking.totalAmount;
+        // bookingStatus.textContent = booking.status;
        
          const bookedSeats = seats.filter(function(seat) {
              return seat.status === "booked";
@@ -166,19 +198,15 @@ confirmBooking.addEventListener("click", function(){
         localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
     
     updateBookingSummary();
+    showBookings();
 
     alert("Booking confirm successfully:");
 })
-cancelBooking.addEventListener("click", function() {
+function cancelBookingByIndex(index) {
     const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const booking = bookings[index];
 
-    if (bookings.length === 0) {
-        return;
-    }
-
-    const booking = bookings[bookings.length - 1];
-
-    if (booking.status === "cancelled") {
+    if (!booking || booking.status === "cancelled") {
         return;
     }
 
@@ -208,12 +236,8 @@ cancelBooking.addEventListener("click", function() {
 
     localStorage.setItem("bookedSeats", JSON.stringify(bookedSeats));
 
-    bookingStatus.textContent = "cancelled";
-    cancelBooking.style.display = "none";
-
     updateBookingSummary();
+    showBookings();
 
     alert("Booking cancelled successfully!");
-});
-showBookings();
-
+}

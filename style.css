@@ -944,3 +944,6 @@ main {
     }
     .seat-container { gap:6px; }
 }
+#booking-template{
+    display: none;
+}
